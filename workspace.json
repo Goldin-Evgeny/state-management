@@ -1,5 +1,9 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "mobx": "apps/mobx",
+    "mobx-e2e": "apps/mobx-e2e",
+    "todo": "libs/todo"
+  }
 }
