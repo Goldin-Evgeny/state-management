@@ -8,6 +8,8 @@ export type TodoAppProps = {
   TodoList: React.ElementType<TodoListProps>;
   TodoItem: React.ElementType<TodoItemProps>;
   todos: TodoModal[];
+  editedTodo: string;
+  handleEditedTodoChange: (newTodo: string) => void;
   handleToggleTodo: (todo: TodoModal) => void;
   handleRemoveTodo: (todo: TodoModal) => void;
   handleAddTodo: () => void;
@@ -19,13 +21,14 @@ const TodoApp = (props: TodoAppProps) => {
     TodoList,
     TodoItem,
     todos,
+    editedTodo,
+    handleEditedTodoChange,
     handleToggleTodo,
     handleRemoveTodo,
     handleAddTodo,
     handleKeyChange,
   } = props;
 
-  const [editedTodo, setEditedTodo] = React.useState<string>('');
   const todoAlreadyExists = _.find(todos, { text: editedTodo });
   const remainingTodos = _.chain(todos)
     .filter((todo) => !todo.done)
@@ -55,7 +58,7 @@ const TodoApp = (props: TodoAppProps) => {
             className={todoAlreadyExists ? styles['invalid'] : ''}
             type="text"
             value={editedTodo}
-            onChange={(evt) => setEditedTodo(evt.target.value)}
+            onChange={(evt) => handleEditedTodoChange(evt.target.value)}
             placeholder="Add todo..."
             onKeyUp={handleKeyChange}
           />

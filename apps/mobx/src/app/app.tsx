@@ -16,6 +16,10 @@ export function App() {
           { text: 'Todo 1', done: true, id: '1' },
           { text: 'Todo 2', done: false, id: '2' },
         ]}
+        editedTodo=""
+        handleEditedTodoChange={function (newTodo: string): void {
+          throw new Error('Function not implemented.');
+        }}
         handleToggleTodo={function (todo: TodoModal): void {
           throw new Error('Function not implemented.');
         }}
