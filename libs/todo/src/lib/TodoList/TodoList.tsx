@@ -1,21 +1,18 @@
 import _ from 'lodash';
-import { ReactElement } from 'react';
-import { TodoItemProps } from '../TodoItem/TodoItem';
+import TodoItem from '../TodoItem/TodoItem';
 import { TodoModal } from '../types';
 import styles from './TodoList.module.scss';
 
 export type TodoListProps = {
-  TodoItem: React.ElementType<TodoItemProps>;
-  todos: TodoModal[];
+  todoList: TodoModal[];
   handleToggleTodo: (todo: TodoModal) => void;
   handleRemoveTodo: (todo: TodoModal) => void;
 };
 
 const TodoList = (props: TodoListProps) => {
-  const { TodoItem, todos, handleToggleTodo, handleRemoveTodo } = props;
-  console.log('Rendering TodoList');
+  const { todoList, handleToggleTodo, handleRemoveTodo } = props;
 
-  if (_.isEmpty(todos)) {
+  if (_.isEmpty(todoList)) {
     return (
       <div className={styles['empty']}>
         <p>
@@ -43,7 +40,7 @@ const TodoList = (props: TodoListProps) => {
 
   return (
     <ul>
-      {_.map(todos, (todo: TodoModal) => (
+      {_.map(todoList, (todo: TodoModal) => (
         <TodoItem
           handleToggleTodo={handleToggleTodo}
           handleRemoveTodo={handleRemoveTodo}

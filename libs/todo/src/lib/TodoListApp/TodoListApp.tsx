@@ -1,13 +1,11 @@
 import _ from 'lodash';
-import React, { KeyboardEventHandler } from 'react';
-import { TodoItemProps } from '../TodoItem/TodoItem';
-import TodoList, { TodoListProps } from '../TodoList/TodoList';
+import { KeyboardEventHandler } from 'react';
+import TodoList from '../TodoList/TodoList';
 import { TodoModal } from '../types';
-import styles from './TodosApp.module.scss';
+import styles from './TodoListApp.module.scss';
+
 export type TodoAppProps = {
-  TodoList: React.ElementType<TodoListProps>;
-  TodoItem: React.ElementType<TodoItemProps>;
-  todos: TodoModal[];
+  todoList: TodoModal[];
   editedTodo: string;
   handleEditedTodoChange: (newTodo: string) => void;
   handleToggleTodo: (todo: TodoModal) => void;
@@ -18,9 +16,7 @@ export type TodoAppProps = {
 
 const TodoApp = (props: TodoAppProps) => {
   const {
-    TodoList,
-    TodoItem,
-    todos,
+    todoList,
     editedTodo,
     handleEditedTodoChange,
     handleToggleTodo,
@@ -29,8 +25,8 @@ const TodoApp = (props: TodoAppProps) => {
     handleKeyChange,
   } = props;
 
-  const todoAlreadyExists = _.find(todos, { text: editedTodo });
-  const remainingTodos = _.chain(todos)
+  const todoAlreadyExists = _.find(todoList, { text: editedTodo });
+  const remainingTodoList = _.chain(todoList)
     .filter((todo) => !todo.done)
     .size()
     .value();
@@ -43,12 +39,12 @@ const TodoApp = (props: TodoAppProps) => {
         <div className={styles['header']}>
           <h1>Todo List</h1>
           <p>
-            {_.size(todos) && remainingTodos === 0 ? (
+            {_.size(todoList) && remainingTodoList === 0 ? (
               'All done!'
             ) : (
               <>
-                You have <b>{remainingTodos}</b> of <b>{_.size(todos)}</b> todos
-                remaining
+                You have <b>{remainingTodoList}</b> of <b>{_.size(todoList)}</b>{' '}
+                todoList remaining
               </>
             )}
           </p>
@@ -66,8 +62,7 @@ const TodoApp = (props: TodoAppProps) => {
         </div>
         <div className={styles['body']}>
           <TodoList
-            TodoItem={TodoItem}
-            todos={todos}
+            todoList={todoList}
             handleToggleTodo={handleToggleTodo}
             handleRemoveTodo={handleRemoveTodo}
           />
