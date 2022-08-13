@@ -4,6 +4,7 @@
   "projects": {
     "context": "apps/context",
     "mobx": "apps/mobx",
+    "redux-toolkit": "apps/redux-toolkit",
     "todo": "libs/todo"
   }
 }

@@ -1,0 +1,83 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/redux-toolkit/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/redux-toolkit",
+        "index": "apps/redux-toolkit/src/index.html",
+        "baseHref": "/",
+        "main": "apps/redux-toolkit/src/main.tsx",
+        "polyfills": "apps/redux-toolkit/src/polyfills.ts",
+        "tsConfig": "apps/redux-toolkit/tsconfig.app.json",
+        "assets": [
+          "apps/redux-toolkit/src/favicon.ico",
+          "apps/redux-toolkit/src/assets"
+        ],
+        "styles": ["apps/redux-toolkit/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/redux-toolkit/src/environments/environment.ts",
+              "with": "apps/redux-toolkit/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "redux-toolkit:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "redux-toolkit:build:development"
+        },
+        "production": {
+          "buildTarget": "redux-toolkit:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/redux-toolkit/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/redux-toolkit"],
+      "options": {
+        "jestConfig": "apps/redux-toolkit/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

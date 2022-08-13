@@ -66,8 +66,6 @@ export function reducer(state: TodoState, action: Action) {
       };
     }
     case 'toggleTodo': {
-      const itemIndex = _.findIndex(state.todoList, { id: action.payload });
-
       return {
         ...state,
         todoList: [
