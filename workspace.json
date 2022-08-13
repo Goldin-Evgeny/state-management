@@ -3,7 +3,6 @@
   "version": 2,
   "projects": {
     "mobx": "apps/mobx",
-    "mobx-e2e": "apps/mobx-e2e",
     "todo": "libs/todo"
   }
 }

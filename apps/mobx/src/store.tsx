@@ -12,8 +12,10 @@ class TodoListStore {
   }
 
   set editedTodo(value: string) {
+    // TODO: add debounce
     this.newTodo = value;
   }
+
   get editedTodo() {
     return this.newTodo;
   }
@@ -51,7 +53,7 @@ class TodoListStore {
   }
 
   async load() {
-    const response = await fetch('http://localhost:3001/todoList');
+    const response = await fetch('http://localhost:3001/todo');
     const todoList: TodoModal[] = await response.json();
     store.todoList = todoList;
   }
