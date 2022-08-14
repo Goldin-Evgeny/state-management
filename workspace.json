@@ -6,6 +6,7 @@
     "mobx": "apps/mobx",
     "recoil": "apps/recoil",
     "redux-toolkit": "apps/redux-toolkit",
+    "rtk-query": "apps/rtk-query",
     "todo": "libs/todo"
   }
 }

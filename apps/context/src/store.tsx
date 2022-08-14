@@ -20,6 +20,11 @@ export const initialState: TodoState = {
   todoList: [],
 };
 
+/**
+ * React context will create an object which coupled with useContext hook will act a sort of 
+ * dependency injection, allowing us to wrap the app with Context.Provider and using the useContext hook
+ * extract the data from components deep in the tree, avoiding drilling the props all the way down.
+ */
 export const TodoContext = React.createContext<TodoState>(initialState);
 export const DispatchContext = React.createContext<Dispatch<Action>>(() => {});
 
@@ -30,6 +35,10 @@ export const useDispatchContext = () => {
   return useContext(DispatchContext);
 };
 
+/**
+ * Reducer function that will be used by the useReducer hook, it will accept the current 
+ * state and with it and the action will produce a new state.
+ */
 export function reducer(state: TodoState, action: Action) {
   switch (action.type) {
     case 'setTodoList': {

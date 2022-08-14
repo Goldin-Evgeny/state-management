@@ -1,0 +1,83 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/rtk-query/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/rtk-query",
+        "index": "apps/rtk-query/src/index.html",
+        "baseHref": "/",
+        "main": "apps/rtk-query/src/main.tsx",
+        "polyfills": "apps/rtk-query/src/polyfills.ts",
+        "tsConfig": "apps/rtk-query/tsconfig.app.json",
+        "assets": [
+          "apps/rtk-query/src/favicon.ico",
+          "apps/rtk-query/src/assets"
+        ],
+        "styles": ["apps/rtk-query/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/rtk-query/src/environments/environment.ts",
+              "with": "apps/rtk-query/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "rtk-query:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "rtk-query:build:development"
+        },
+        "production": {
+          "buildTarget": "rtk-query:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/rtk-query/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/rtk-query"],
+      "options": {
+        "jestConfig": "apps/rtk-query/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

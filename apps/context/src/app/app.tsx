@@ -1,16 +1,17 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { TodoModal } from '@state-management/todo';
 import React, { useEffect } from 'react';
 import { useReducer } from 'react';
 import TodoApp from '../components/TodoListApp/TodoListApp';
 import { DispatchContext, initialState, reducer, TodoContext } from '../store';
-import styles from './app.module.scss';
-import NxWelcome from './nx-welcome';
 
 export function App() {
+  /**
+   * React use reducer hook.
+   * Accepts a reducer function of type (state, action) => newState, and returns the current state paired with a dispatch method.
+   */
   const [state, dispatch] = useReducer(reducer, initialState);
   const memoizedState = React.useMemo(() => state, [state]);
-  
+
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
       const todoList: TodoModal[] = await response.json();
@@ -20,6 +21,10 @@ export function App() {
 
   return (
     <>
+      {/**
+       * Separating the dispatch from the state will eliminate
+       * unnecessary renders for components that only dispatch actions
+       * */}
       <DispatchContext.Provider value={dispatch}>
         <TodoContext.Provider value={memoizedState}>
           <TodoApp />
