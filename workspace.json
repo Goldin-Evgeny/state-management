@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "context": "apps/context",
+    "jotai": "apps/jotai",
     "mobx": "apps/mobx",
     "recoil": "apps/recoil",
     "redux-toolkit": "apps/redux-toolkit",
