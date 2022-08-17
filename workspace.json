@@ -8,6 +8,7 @@
     "recoil": "apps/recoil",
     "redux-toolkit": "apps/redux-toolkit",
     "rtk-query": "apps/rtk-query",
-    "todo": "libs/todo"
+    "todo": "libs/todo",
+    "util": "libs/util"
   }
 }

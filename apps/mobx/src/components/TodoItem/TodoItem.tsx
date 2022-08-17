@@ -3,18 +3,22 @@ import classNames from 'classnames';
 import styles from './TodoItem.module.scss';
 import { observer } from 'mobx-react';
 import store from '../../store';
+import React from 'react';
 
 export type TodoItemProps = {
   todo: TodoModal;
 };
-
+const useCounter = true;
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
-
-  console.log('Rendering TodoItem');
-
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
+  console.log('Rendering Item');
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input

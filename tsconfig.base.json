@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@state-management/todo": ["libs/todo/src/index.ts"]
+      "@state-management/todo": ["libs/todo/src/index.ts"],
+      "@state-management/util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

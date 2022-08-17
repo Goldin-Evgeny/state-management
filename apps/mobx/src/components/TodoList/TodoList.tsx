@@ -5,15 +5,21 @@ import TodoItem from '../TodoItem/TodoItem';
 import { observer } from 'mobx-react';
 
 import styles from './TodoList.module.scss';
+import React from 'react';
+const useCounter = true;
 
 const TodoList = () => {
-
-  console.log('Rendering TodoList');
-
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
+  console.log('Rendering List');
 
   if (_.isEmpty(store.todoList)) {
     return (
       <div className={styles['empty']}>
+        {useCounter && (
+          <span className={styles['counter']}>{renderCounter.current}</span>
+        )}
+
         <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -39,11 +45,12 @@ const TodoList = () => {
 
   return (
     <ul>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
+
       {_.map(store.todoList, (todo: TodoModal) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-        />
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );
