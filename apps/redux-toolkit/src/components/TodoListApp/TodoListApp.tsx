@@ -1,6 +1,8 @@
+import { useRenderCounter } from '@state-management/util';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import _ from 'lodash';
 import React from 'react';
-import {  useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   addTodo,
@@ -13,7 +15,6 @@ import {
 } from '../../redux/todoSlice';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
   const dispatch = useAppDispatch();
@@ -24,17 +25,15 @@ const TodoApp = () => {
 
   useEffect(() => {
     dispatch(loadTodoList());
-  }, [])
+  }, []);
 
   console.log('Rendering TodoApp');
 
-  const renderCounter = React.useRef(0);
-  renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   return (
     <div className={styles['root']}>
-       {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

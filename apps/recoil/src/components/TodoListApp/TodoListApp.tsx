@@ -11,17 +11,18 @@ import {
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
+import { useRenderCounter } from '@state-management/util';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
+
 
 const TodoApp = () => {
-
-  const renderCounter = React.useRef(0);
-  renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const remainingTodoList = useRecoilValue(remainingTodoListSelector);
   const todoAlreadyExists = useRecoilValue(todoAlreadyExistsSelector);
   const [editedTodo, setEditedTodo] = useRecoilState(editedTodoAtom);
+
   console.log('Rendering TodoApp');
 
   useEffect(() => {
@@ -33,9 +34,8 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
-      {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

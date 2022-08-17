@@ -51,6 +51,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "rtk-query:build",
+        "port": 4205,
         "hmr": true
       },
       "configurations": {

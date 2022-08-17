@@ -48,6 +48,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "zustand:build",
+        "port": 4206,
         "hmr": true
       },
       "configurations": {

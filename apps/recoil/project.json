@@ -48,6 +48,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "recoil:build",
+        "port": 4203,
         "hmr": true
       },
       "configurations": {

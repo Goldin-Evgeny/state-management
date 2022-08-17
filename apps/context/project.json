@@ -48,6 +48,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "context:build",
+        "port": 4202,
         "hmr": true
       },
       "configurations": {

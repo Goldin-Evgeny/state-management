@@ -1,9 +1,10 @@
+import { useRenderCounter } from '@state-management/util';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import _ from 'lodash';
 import React from 'react';
 import { useDispatchContext, useTodoContext } from '../../store';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
   const { todoList, editedTodo } = useTodoContext();
@@ -13,16 +14,13 @@ const TodoApp = () => {
     .filter((todo) => !todo.done)
     .size()
     .value();
-
-    const renderCounter = React.useRef(0);
-    renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   console.log('Rendering TodoApp');
 
   return (
     <div className={styles['root']}>
-      {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
@@ -42,9 +40,13 @@ const TodoApp = () => {
             className={todoAlreadyExists ? styles['invalid'] : ''}
             type="text"
             value={editedTodo}
-            onChange={(evt) => dispatch({ type: 'setEditedTodo', payload: evt.target.value })}
+            onChange={(evt) =>
+              dispatch({ type: 'setEditedTodo', payload: evt.target.value })
+            }
             placeholder="Add todo..."
-            onKeyUp={(evt) => evt.key === 'Enter' && dispatch({ type: 'addTodo' })}
+            onKeyUp={(evt) =>
+              evt.key === 'Enter' && dispatch({ type: 'addTodo' })
+            }
           />
           <button onClick={() => dispatch({ type: 'addTodo' })}>+</button>
         </div>

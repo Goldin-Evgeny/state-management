@@ -5,23 +5,22 @@ import styles from './TodoListApp.module.scss';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
 import { useTodoStore } from '../../store';
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
+import { useRenderCounter } from '@state-management/util';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 
 const TodoApp = () => {
-
-  const renderCounter = React.useRef(0);
-  renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   // const [todoList, setTodoList] = useRecoilState(todoListAtom);
   // const remainingTodoList = useRecoilValue(remainingTodoListSelector);
   // const todoAlreadyExists = useRecoilValue(todoAlreadyExistsSelector);
   // const [editedTodo, setEditedTodo] = useRecoilState(editedTodoAtom);
-  const loadTodoList = useTodoStore(state => state.load)
-  const todoList = useTodoStore(state => state.todoList)
-  const editedTodo = useTodoStore(state => state.editedTodo)
-  const addTodo = useTodoStore(state => state.addTodo)
-  const setEditedTodo = useTodoStore(state => state.setEditedTodo)
-  const remainingTodoList = useTodoStore(state => state.remainingTodoList)
-  const todoAlreadyExists = useTodoStore(state => state.todoAlreadyExists)
+  const loadTodoList = useTodoStore((state) => state.load);
+  const todoList = useTodoStore((state) => state.todoList);
+  const editedTodo = useTodoStore((state) => state.editedTodo);
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const setEditedTodo = useTodoStore((state) => state.setEditedTodo);
+  const remainingTodoList = useTodoStore((state) => state.remainingTodoList);
+  const todoAlreadyExists = useTodoStore((state) => state.todoAlreadyExists);
   console.log('Rendering TodoApp');
 
   useEffect(() => {
@@ -30,9 +29,8 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
-      {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
@@ -41,8 +39,8 @@ const TodoApp = () => {
               'All done!'
             ) : (
               <>
-                You have <b>{remainingTodoList()}</b> of <b>{_.size(todoList)}</b>{' '}
-                todoList remaining
+                You have <b>{remainingTodoList()}</b> of{' '}
+                <b>{_.size(todoList)}</b> todoList remaining
               </>
             )}
           </p>
@@ -54,16 +52,9 @@ const TodoApp = () => {
             value={editedTodo}
             onChange={(evt) => setEditedTodo(evt.target.value)}
             placeholder="Add todo..."
-            onKeyUp={(event) =>
-              event.key === 'Enter' &&
-              addTodo()
-            }
+            onKeyUp={(event) => event.key === 'Enter' && addTodo()}
           />
-          <button
-            onClick={() => addTodo()}
-          >
-            +
-          </button>
+          <button onClick={() => addTodo()}>+</button>
         </div>
         <div className={styles['body']}>
           <TodoList />

@@ -1,5 +1,7 @@
 import { TodoModal } from '@state-management/todo';
+import { useRenderCounter } from '@state-management/util';
 import classNames from 'classnames';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import React from 'react';
 import { useDispatchContext } from '../../store';
 import styles from './TodoItem.module.scss';
@@ -7,21 +9,18 @@ import styles from './TodoItem.module.scss';
 export type TodoItemProps = {
   todo: TodoModal;
 };
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
   const dispatch = useDispatchContext();
 
-  const renderCounter = React.useRef(0);
-  renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   console.log('Rendering TodoItem');
 
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-      {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input

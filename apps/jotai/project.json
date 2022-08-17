@@ -48,6 +48,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "jotai:build",
+        "port": 4201,
         "hmr": true
       },
       "configurations": {

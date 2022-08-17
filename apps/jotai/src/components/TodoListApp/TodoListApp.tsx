@@ -11,7 +11,8 @@ import {
 import { TodoModal } from '@state-management/todo';
 import { useAtom, useAtomValue } from 'jotai';
 import React from 'react';
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
+import { useRenderCounter } from '@state-management/util';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 
 const TodoApp = () => {
   const [todoList, setTodoList] = useAtom(todoListAtom);
@@ -20,8 +21,7 @@ const TodoApp = () => {
   const [editedTodo, setEditedTodo] = useAtom(editedTodoAtom);
   console.log('Rendering TodoApp');
 
-  const renderCounter = React.useRef(0);
-  renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
       const todoList: TodoModal[] = await response.json();
@@ -31,9 +31,8 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
-      {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

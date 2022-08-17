@@ -51,6 +51,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "redux-toolkit:build",
+        "port": 4204,
         "hmr": true
       },
       "configurations": {

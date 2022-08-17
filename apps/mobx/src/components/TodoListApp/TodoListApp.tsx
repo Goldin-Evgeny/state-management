@@ -5,18 +5,17 @@ import { observer } from 'mobx-react';
 
 import styles from './TodoListApp.module.scss';
 import React from 'react';
-const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
+import { useRenderCounter } from '@state-management/util';
+import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 
 const TodoApp = () => {
-  const renderCounter = React.useRef(0);
-  renderCounter.current = renderCounter.current + 1;
+  const count = useRenderCounter();
   console.log('Rendering App');
 
   return (
     <div className={styles['root']}>
-      {useCounter && (
-        <span className={styles['counter']}>{renderCounter.current}</span>
-      )}
+      <RenderCounter count={count} />
+
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
