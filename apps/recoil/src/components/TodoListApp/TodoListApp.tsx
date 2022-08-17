@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { KeyboardEventHandler, useEffect } from 'react';
+import { useEffect } from 'react';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -10,8 +10,13 @@ import {
   todoListAtom,
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
+import React from 'react';
+const useCounter = true;
 
 const TodoApp = () => {
+
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const remainingTodoList = useRecoilValue(remainingTodoListSelector);
   const todoAlreadyExists = useRecoilValue(todoAlreadyExistsSelector);
@@ -23,10 +28,13 @@ const TodoApp = () => {
       const todoList: TodoModal[] = await response.json();
       setTodoList(todoList);
     });
-  }, []);
+  }, [setTodoList]);
 
   return (
     <div className={styles['root']}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

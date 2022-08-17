@@ -1,5 +1,6 @@
 import { TodoModal } from '@state-management/todo';
 import classNames from 'classnames';
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { todoListAtom } from '../../store';
 import styles from './TodoItem.module.scss';
@@ -8,8 +9,13 @@ export type TodoItemProps = {
   todo: TodoModal;
 };
 
+const useCounter = true;
+
 const TodoItem = (props: TodoItemProps) => {
-  const { todo } = props;
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
+  const {todo} = props;
+
   const setTodoList = useSetRecoilState(todoListAtom);
 
   console.log('Rendering TodoItem');
@@ -28,6 +34,9 @@ const TodoItem = (props: TodoItemProps) => {
 
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input
@@ -65,4 +74,4 @@ const TodoItem = (props: TodoItemProps) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
