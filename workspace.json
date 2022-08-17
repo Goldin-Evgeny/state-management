@@ -9,6 +9,7 @@
     "redux-toolkit": "apps/redux-toolkit",
     "rtk-query": "apps/rtk-query",
     "todo": "libs/todo",
-    "util": "libs/util"
+    "util": "libs/util",
+    "zustand": "apps/zustand"
   }
 }
