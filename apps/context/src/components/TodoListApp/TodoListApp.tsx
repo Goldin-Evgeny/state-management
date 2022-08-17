@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import { KeyboardEventHandler } from 'react';
+import React from 'react';
 import { useDispatchContext, useTodoContext } from '../../store';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
+const useCounter = true;
 
 const TodoApp = () => {
   const { todoList, editedTodo } = useTodoContext();
@@ -13,10 +14,15 @@ const TodoApp = () => {
     .size()
     .value();
 
+    const renderCounter = React.useRef(0);
+    renderCounter.current = renderCounter.current + 1;
   console.log('Rendering TodoApp');
 
   return (
     <div className={styles['root']}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
@@ -50,4 +56,4 @@ const TodoApp = () => {
   );
 };
 
-export default TodoApp;
+export default React.memo(TodoApp);
