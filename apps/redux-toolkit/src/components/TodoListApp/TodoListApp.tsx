@@ -13,7 +13,7 @@ import {
 } from '../../redux/todoSlice';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
   const dispatch = useAppDispatch();

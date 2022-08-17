@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 
 import styles from './TodoListApp.module.scss';
 import React from 'react';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
   const renderCounter = React.useRef(0);

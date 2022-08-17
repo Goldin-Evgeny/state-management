@@ -5,7 +5,7 @@ import { useAddTodoMutation, useGetTodoListQuery } from '../../services/todo';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
 import { v4 as uuidv4 } from 'uuid';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
   const { data } = useGetTodoListQuery();

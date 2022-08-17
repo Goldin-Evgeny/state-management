@@ -5,7 +5,7 @@ import styles from './TodoListApp.module.scss';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
 import { useTodoStore } from '../../store';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
 

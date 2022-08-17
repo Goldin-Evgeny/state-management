@@ -4,7 +4,7 @@ import React from 'react';
 import { useTodoContext } from '../../store';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoList = () => {
 

@@ -5,7 +5,7 @@ import styles from './TodoList.module.scss';
 import { useRecoilValue } from 'recoil';
 import { todoListAtom } from '../../store';
 import React from 'react';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoList = () => {
   const todoList = useRecoilValue(todoListAtom);

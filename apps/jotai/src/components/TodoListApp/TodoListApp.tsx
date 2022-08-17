@@ -11,7 +11,7 @@ import {
 import { TodoModal } from '@state-management/todo';
 import { useAtom, useAtomValue } from 'jotai';
 import React from 'react';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
   const [todoList, setTodoList] = useAtom(todoListAtom);

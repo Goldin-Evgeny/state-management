@@ -11,7 +11,8 @@ import {
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
-const useCounter = true;
+
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoApp = () => {
 

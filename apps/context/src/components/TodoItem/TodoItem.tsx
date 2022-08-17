@@ -7,7 +7,7 @@ import styles from './TodoItem.module.scss';
 export type TodoItemProps = {
   todo: TodoModal;
 };
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;

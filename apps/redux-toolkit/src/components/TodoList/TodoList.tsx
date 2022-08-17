@@ -5,7 +5,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectTodoList } from '../../redux/todoSlice';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoList = () => {
   

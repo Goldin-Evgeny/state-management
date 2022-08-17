@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { todoListAtom } from '../../store';
 import { useAtomValue } from 'jotai'
 import React from 'react';
-const useCounter = true;
+const useCounter = process.env['NX_USE_COUNT_FEATURE'] === 'true';
 
 const TodoList = () => {
   const todoList = useAtomValue(todoListAtom);
