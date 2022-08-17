@@ -10,6 +10,8 @@ import {
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
 import { useAtom, useAtomValue } from 'jotai';
+import React from 'react';
+const useCounter = true;
 
 const TodoApp = () => {
   const [todoList, setTodoList] = useAtom(todoListAtom);
@@ -18,6 +20,8 @@ const TodoApp = () => {
   const [editedTodo, setEditedTodo] = useAtom(editedTodoAtom);
   console.log('Rendering TodoApp');
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
       const todoList: TodoModal[] = await response.json();
@@ -27,6 +31,9 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

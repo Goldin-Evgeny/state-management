@@ -3,17 +3,21 @@ import classNames from 'classnames';
 import { useSetRecoilState } from 'recoil';
 import { todoListAtom } from '../../store';
 import styles from './TodoItem.module.scss';
-import { useSetAtom } from 'jotai'
+import { useSetAtom, Provider } from 'jotai'
+import React from 'react';
 
 
 export type TodoItemProps = {
   todo: TodoModal;
 };
+const useCounter = true;
 
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
   const setTodoList = useSetAtom(todoListAtom);
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   console.log('Rendering TodoItem');
 
   const handleToggleTodo = () => {
@@ -29,7 +33,11 @@ const TodoItem = (props: TodoItemProps) => {
   };
 
   return (
+
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input
@@ -67,4 +75,4 @@ const TodoItem = (props: TodoItemProps) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
