@@ -1,15 +1,23 @@
+import React from 'react';
+
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
 import { useGetTodoListQuery } from '../../services/todo';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
+const useCounter = true;
 
 const TodoList = () => {
   const { data } = useGetTodoListQuery()
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   if (_.isEmpty(data)) {
     return (
       <div className={styles['empty']}>
+        {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
         <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -35,6 +43,9 @@ const TodoList = () => {
 
   return (
     <ul>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       {_.map(data, (todo: TodoModal) => (
         <TodoItem
           key={todo.id}
@@ -45,4 +56,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default React.memo(TodoList);

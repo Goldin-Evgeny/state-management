@@ -5,6 +5,7 @@ import { useAddTodoMutation, useGetTodoListQuery } from '../../services/todo';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
 import { v4 as uuidv4 } from 'uuid';
+const useCounter = true;
 
 const TodoApp = () => {
   const { data } = useGetTodoListQuery();
@@ -12,6 +13,8 @@ const TodoApp = () => {
   const [editedTodo, setEditedTodo] = React.useState<string>('');
 
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   const todoAlreadyExists = _.find(data, { text: editedTodo });
   const remainingTodoList = _.chain(data)
     .filter((todo) => !todo.done)
@@ -22,6 +25,9 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

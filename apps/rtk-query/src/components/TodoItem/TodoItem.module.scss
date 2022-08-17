@@ -5,6 +5,12 @@
   user-select: none;
   padding: 0.65rem 0;
   text-align: left;
+
+  .counter {
+    display: block;
+    margin: 0 4px;
+    font-size: 12px;
+  }
   &:first-child,
   &:last-child {
     padding-top: 0;
