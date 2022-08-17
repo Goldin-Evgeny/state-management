@@ -5,7 +5,7 @@ import { TodoModal } from '@state-management/todo';
 
 class TodoListStore {
   todoList: TodoModal[] = [];
-  private newTodo: string = '';
+  private newTodo = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -55,7 +55,7 @@ class TodoListStore {
   async load() {
     const response = await fetch('http://localhost:3001/todo');
     const todoList: TodoModal[] = await response.json();
-    store.todoList = todoList;
+    this.todoList = todoList;
   }
 }
 
