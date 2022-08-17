@@ -1,17 +1,24 @@
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
+import React from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import { selectTodoList } from '../../redux/todoSlice';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
+const useCounter = true;
 
 const TodoList = () => {
   
   const todoList = useAppSelector(selectTodoList);
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   if (_.isEmpty(todoList)) {
     return (
       <div className={styles['empty']}>
+        {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
         <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -37,6 +44,9 @@ const TodoList = () => {
 
   return (
     <ul>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       {_.map(todoList, (todo: TodoModal) => (
         <TodoItem
           key={todo.id}
@@ -47,4 +57,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default React.memo(TodoList);

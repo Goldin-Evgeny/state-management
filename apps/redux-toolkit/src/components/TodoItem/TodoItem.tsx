@@ -1,5 +1,6 @@
 import { TodoModal } from '@state-management/todo';
 import classNames from 'classnames';
+import React from 'react';
 import { useAppDispatch } from '../../redux/hooks';
 import { removeTodo, toggleTodo } from '../../redux/todoSlice';
 import styles from './TodoItem.module.scss';
@@ -7,14 +8,20 @@ import styles from './TodoItem.module.scss';
 export type TodoItemProps = {
   todo: TodoModal;
 };
+const useCounter = true;
 
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
   const dispatch = useAppDispatch();
   console.log('Rendering TodoItem');
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
+      {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input
@@ -52,4 +59,4 @@ const TodoItem = (props: TodoItemProps) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);

@@ -1,6 +1,6 @@
-import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
-import { KeyboardEventHandler, useEffect } from 'react';
+import React from 'react';
+import {  useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   addTodo,
@@ -13,6 +13,7 @@ import {
 } from '../../redux/todoSlice';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
+const useCounter = true;
 
 const TodoApp = () => {
   const dispatch = useAppDispatch();
@@ -27,8 +28,13 @@ const TodoApp = () => {
 
   console.log('Rendering TodoApp');
 
+  const renderCounter = React.useRef(0);
+  renderCounter.current = renderCounter.current + 1;
   return (
     <div className={styles['root']}>
+       {useCounter && (
+        <span className={styles['counter']}>{renderCounter.current}</span>
+      )}
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
