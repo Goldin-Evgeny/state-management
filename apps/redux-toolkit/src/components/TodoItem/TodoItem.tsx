@@ -1,17 +1,23 @@
 import { TodoModal } from '@state-management/todo';
 import classNames from 'classnames';
+import _ from 'lodash';
 import React from 'react';
-import { useAppDispatch } from '../../redux/hooks';
-import { removeTodo, toggleTodo } from '../../redux/todoSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { removeTodo, selectTodoIDList, toggleTodo } from '../../redux/todoSlice';
 import styles from './TodoItem.module.scss';
 
 export type TodoItemProps = {
-  todo: TodoModal;
+  todoId: number;
 };
 
 const TodoItem = (props: TodoItemProps) => {
-  const { todo } = props;
+  const { todoId } = props;
   const dispatch = useAppDispatch();
+  const todo = useAppSelector((state) => state.todo.todoList.find(todo => todo.id === todoId));
+
+  if(_.isUndefined(todo)){
+    return null;
+  }
   
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>

@@ -1,13 +1,14 @@
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
 import React from 'react';
+import { shallowEqual } from 'react-redux';
 import { useAppSelector } from '../../redux/hooks';
-import { selectTodoList } from '../../redux/todoSlice';
+import { selectTodoIDList } from '../../redux/todoSlice';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
 
 const TodoList = () => {
-  const todoList = useAppSelector(selectTodoList);
+  const todoList = useAppSelector(selectTodoIDList, shallowEqual);
 
   if (_.isEmpty(todoList)) {
     return (
@@ -37,8 +38,8 @@ const TodoList = () => {
 
   return (
     <ul>
-      {_.map(todoList, (todo: TodoModal) => (
-        <TodoItem key={todo.id} todo={todo} />
+      {_.map(todoList, (todo: number) => (
+        <TodoItem key={todo} todoId={todo} />
       ))}
     </ul>
   );

@@ -2,15 +2,11 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import {
-  editedTodoAtom,
-  remainingTodoListSelector,
-  todoAlreadyExistsSelector,
   todoListAtom,
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
-import React from 'react';
 import RemainingTodoMessage from '../RemainingTodoMessage/RemainingTodoMessage';
 import TodoForm from '../TodoForm/TodoForm';
 

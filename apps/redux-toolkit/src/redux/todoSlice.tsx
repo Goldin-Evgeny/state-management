@@ -51,6 +51,7 @@ export const { setTodoList, setEditedTodo, addTodo, removeTodo, toggleTodo } =  
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectTodoList = (state: RootState) => state.todo.todoList;
+export const selectTodoIDList = (state: RootState) => _.map(state.todo.todoList, todo => todo.id);
 export const selectEditedTodo = (state: RootState) => state.todo.editedTodo;
 export const selectTodoAlreadyExists = (state: RootState) => _.find(state.todo.todoList, { text: state.todo.editedTodo });
 export const selectRemainingTodoList = (state: RootState) => _.chain(state.todo.todoList).filter((todo) => !todo.done).size().value();
