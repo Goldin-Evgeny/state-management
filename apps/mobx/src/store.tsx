@@ -45,7 +45,7 @@ class TodoListStore {
       return;
     }
     this.todoList.push({
-      id: Math.random(),
+      id: _.random(Number.MAX_SAFE_INTEGER),
       text: this.newTodo,
       done: false,
     });

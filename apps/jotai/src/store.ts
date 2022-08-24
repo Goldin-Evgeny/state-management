@@ -1,15 +1,21 @@
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
 import { atom, PrimitiveAtom, useAtom } from 'jotai';
+import { atomWithReducer } from 'jotai/utils';
 
 export const todoListAtom = atom<TodoModal[]>([]);
 
 export const todoIdListAtom = atom<number[]>((get) => {
   const todoList: TodoModal[] = get(todoListAtom);
-  return _.map(todoList, (todo) => todo.id)
+  return _.map(todoList, (todo) => todo.id);
 });
 
 export const editedTodoAtom = atom('');
+
+export const todoListSizeAtom = atom<number>((get) => {
+  const todoList: TodoModal[] = get(todoListAtom);
+  return _.size(todoList);
+});
 
 export const remainingTodoListSelector = atom<number>((get) => {
   const todoList: TodoModal[] = get(todoListAtom);

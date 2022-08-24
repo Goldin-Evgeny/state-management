@@ -3,20 +3,29 @@ import classNames from 'classnames';
 import { useSetRecoilState } from 'recoil';
 import { todoListAtom } from '../../store';
 import styles from './TodoItem.module.scss';
-import { useSetAtom, Provider } from 'jotai';
-import React from 'react';
-
-
+import { useSetAtom, Provider, atom, useAtom, useAtomValue } from 'jotai';
+import React, { useMemo } from 'react';
+import _ from 'lodash';
 
 export type TodoItemProps = {
-  todo: TodoModal;
+  todoId: number;
 };
 
 const TodoItem = (props: TodoItemProps) => {
-  const { todo } = props;
+  const { todoId } = props;
+  // const todo = useAtomValue(todoListAtom)[todoId];
+  const [todo] = useAtom(
+    useMemo(
+      // This is also fine
+      () => atom((get) => get(todoListAtom).find((todo) => todo.id === todoId)),
+      []
+    )
+  );
   const setTodoList = useSetAtom(todoListAtom);
 
-
+  if (_.isUndefined(todo)) {
+    return null;
+  }
   const handleToggleTodo = () => {
     setTodoList((prevState) =>
       prevState.map((item) =>
@@ -31,7 +40,6 @@ const TodoItem = (props: TodoItemProps) => {
 
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input

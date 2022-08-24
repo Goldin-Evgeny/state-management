@@ -27,7 +27,7 @@ export const todoSlice = createSlice({
     },
     addTodo: (state) => {
       state.todoList.push({
-        id: Math.random(),
+        id: _.random(Number.MAX_SAFE_INTEGER),
         done: false,
         text: state.editedTodo,
       });

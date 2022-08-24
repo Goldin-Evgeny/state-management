@@ -5,15 +5,11 @@ import styles from './TodoListApp.module.scss';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
 import { useTodoStore } from '../../store';
+import RemainingTodoMessage from '../RemainingTodoMessage/RemainingTodoMessage';
+import TodoForm from '../TodoForm/TodoForm';
 
 const TodoApp = () => {
   const loadTodoList = useTodoStore((state) => state.load);
-  const todoList = useTodoStore((state) => state.todoList);
-  const editedTodo = useTodoStore((state) => state.editedTodo);
-  const addTodo = useTodoStore((state) => state.addTodo);
-  const setEditedTodo = useTodoStore((state) => state.setEditedTodo);
-  const remainingTodoList = useTodoStore((state) => state.remainingTodoList);
-  const todoAlreadyExists = useTodoStore((state) => state.todoAlreadyExists);
 
   useEffect(() => {
     loadTodoList();
@@ -24,28 +20,9 @@ const TodoApp = () => {
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
-          <p>
-            {_.size(todoList) && remainingTodoList() === 0 ? (
-              'All done!'
-            ) : (
-              <>
-                You have <b>{remainingTodoList()}</b> of{' '}
-                <b>{_.size(todoList)}</b> todoList remaining
-              </>
-            )}
-          </p>
+          <RemainingTodoMessage />
         </div>
-        <div className={styles['form']}>
-          <input
-            className={todoAlreadyExists() ? styles['invalid'] : ''}
-            type="text"
-            value={editedTodo}
-            onChange={(evt) => setEditedTodo(evt.target.value)}
-            placeholder="Add todo..."
-            onKeyUp={(event) => event.key === 'Enter' && addTodo()}
-          />
-          <button onClick={() => addTodo()}>+</button>
-        </div>
+        <TodoForm />
         <div className={styles['body']}>
           <TodoList />
         </div>

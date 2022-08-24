@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import {
   editedTodoAtom,
   remainingTodoListSelector,
@@ -11,17 +11,11 @@ import {
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
-
-
-
-
+import RemainingTodoMessage from '../RemainingTodoMessage/RemainingTodoMessage';
+import TodoForm from '../TodoForm/TodoForm';
 
 const TodoApp = () => {
-  const [todoList, setTodoList] = useRecoilState(todoListAtom);
-  const remainingTodoList = useRecoilValue(remainingTodoListSelector);
-  const todoAlreadyExists = useRecoilValue(todoAlreadyExistsSelector);
-  const [editedTodo, setEditedTodo] = useRecoilState(editedTodoAtom);
-
+  const setTodoList = useSetRecoilState(todoListAtom);
 
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
@@ -32,55 +26,12 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
-
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
-          <p>
-            {_.size(todoList) && remainingTodoList === 0 ? (
-              'All done!'
-            ) : (
-              <>
-                You have <b>{remainingTodoList}</b> of <b>{_.size(todoList)}</b>{' '}
-                todoList remaining
-              </>
-            )}
-          </p>
+          <RemainingTodoMessage />
         </div>
-        <div className={styles['form']}>
-          <input
-            className={todoAlreadyExists ? styles['invalid'] : ''}
-            type="text"
-            value={editedTodo}
-            onChange={(evt) => setEditedTodo(evt.target.value)}
-            placeholder="Add todo..."
-            onKeyUp={(event) =>
-              event.key === 'Enter' &&
-              setTodoList((prevState) =>
-                todoAlreadyExists
-                  ? prevState
-                  : [
-                      ...prevState,
-                      { id: Math.random(), text: editedTodo, done: false },
-                    ]
-              )
-            }
-          />
-          <button
-            onClick={() =>
-              setTodoList((prevState) =>
-                todoAlreadyExists
-                  ? prevState
-                  : [
-                      ...prevState,
-                      { id: Math.random(), text: editedTodo, done: false },
-                    ]
-              )
-            }
-          >
-            +
-          </button>
-        </div>
+        <TodoForm />
         <div className={styles['body']}>
           <TodoList />
         </div>

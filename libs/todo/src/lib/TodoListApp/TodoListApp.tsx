@@ -48,7 +48,7 @@ const TodoApp = (props: TodoAppProps) => {
             )}
           </p>
         </div>
-        <div className={styles['form']}>
+        <div className={styles['root']}>
           <input
             className={todoAlreadyExists ? styles['invalid'] : ''}
             type="text"

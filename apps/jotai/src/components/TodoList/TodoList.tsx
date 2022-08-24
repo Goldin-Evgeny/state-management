@@ -3,14 +3,14 @@ import _ from 'lodash';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { todoIdListAtom } from '../../store';
+import { todoIdListAtom, todoListAtom } from '../../store';
 import { useAtomValue } from 'jotai';
 import React from 'react';
 
 
 
 const TodoList = () => {
-  const todoList = useAtomValue(todoIdListAtom);
+  const todoList = useAtomValue<number[]>(todoIdListAtom);
 
   if (_.isEmpty(todoList)) {
     return (
@@ -42,8 +42,8 @@ const TodoList = () => {
   return (
     <ul>
 
-      {_.map(todoList, (todo: TodoModal) => (
-        <TodoItem key={todo.id} todo={todo} />
+      {_.map(todoList, (todo: number) => (
+        <TodoItem key={todo} todoId={todo} />
       ))}
     </ul>
   );

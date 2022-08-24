@@ -10,15 +10,13 @@ import {
   selectTodoList,
   setEditedTodo,
 } from '../../redux/todoSlice';
+import RemainingTodoMessage from '../RemainingTodoMessage/RemainingTodoMessage';
+import TodoForm from '../TodoForm/TodoForm';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
 
 const TodoApp = () => {
   const dispatch = useAppDispatch();
-  const todoList = useAppSelector(selectTodoList);
-  const editedTodo = useAppSelector(selectEditedTodo);
-  const todoAlreadyExists = useAppSelector(selectTodoAlreadyExists);
-  const remainingTodoItems = useAppSelector(selectRemainingTodoList);
 
   useEffect(() => {
     dispatch(loadTodoList());
@@ -29,28 +27,9 @@ const TodoApp = () => {
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
-          <p>
-            {_.size(todoList) && remainingTodoItems === 0 ? (
-              'All done!'
-            ) : (
-              <>
-                You have <b>{remainingTodoItems}</b> of{' '}
-                <b>{_.size(todoList)}</b> todoList remaining
-              </>
-            )}
-          </p>
+          <RemainingTodoMessage />
         </div>
-        <div className={styles['form']}>
-          <input
-            className={todoAlreadyExists ? styles['invalid'] : ''}
-            type="text"
-            value={editedTodo}
-            onChange={(evt) => dispatch(setEditedTodo(evt.target.value))}
-            placeholder="Add todo..."
-            onKeyUp={(evt) => evt.key === 'Enter' && dispatch(addTodo())}
-          />
-          <button onClick={() => dispatch(addTodo())}>+</button>
-        </div>
+        <TodoForm />
         <div className={styles['body']}>
           <TodoList />
         </div>

@@ -1,52 +1,19 @@
-
-
 import _ from 'lodash';
 import React from 'react';
-import { useDispatchContext, useTodoContext } from '../../store';
+import RemainingTodoMessage from '../RemainingTodoMessage/RemainingTodoMessage';
+import TodoForm from '../TodoForm/TodoForm';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoListApp.module.scss';
 
 const TodoApp = () => {
-  const { todoList, editedTodo } = useTodoContext();
-  const dispatch = useDispatchContext();
-  const todoAlreadyExists = _.find(todoList, { text: editedTodo });
-  const remainingTodoList = _.chain(todoList)
-    .filter((todo) => !todo.done)
-    .size()
-    .value();
-
   return (
     <div className={styles['root']}>
-
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>
-          <p>
-            {_.size(todoList) && remainingTodoList === 0 ? (
-              'All done!'
-            ) : (
-              <>
-                You have <b>{remainingTodoList}</b> of <b>{_.size(todoList)}</b>{' '}
-                todoList remaining
-              </>
-            )}
-          </p>
+          <RemainingTodoMessage />
         </div>
-        <div className={styles['form']}>
-          <input
-            className={todoAlreadyExists ? styles['invalid'] : ''}
-            type="text"
-            value={editedTodo}
-            onChange={(evt) =>
-              dispatch({ type: 'setEditedTodo', payload: evt.target.value })
-            }
-            placeholder="Add todo..."
-            onKeyUp={(evt) =>
-              evt.key === 'Enter' && dispatch({ type: 'addTodo' })
-            }
-          />
-          <button onClick={() => dispatch({ type: 'addTodo' })}>+</button>
-        </div>
+        <TodoForm />
         <div className={styles['body']}>
           <TodoList />
         </div>

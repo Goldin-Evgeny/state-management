@@ -20,7 +20,7 @@ export const useTodoStore = create<TodoState>((set, get) => ({
   setEditedTodo: (newTodo:string) => set((state) => ({...state, editedTodo:newTodo})),
   removeTodo: (id:number) => set((state) => ({...state, todoList:_.filter(state.todoList, (todo) => todo.id !== id)})),
   addTodo: () => set((state) => ({editedTodo: '', todoList: [...state.todoList, {
-    id: Math.random(),
+    id: _.random(Number.MAX_SAFE_INTEGER),
     text: state.editedTodo,
     done: false,
   }]})),
