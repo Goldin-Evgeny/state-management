@@ -12,8 +12,8 @@ type Action =
   | { type: 'setTodoList'; payload: TodoModal[] }
   | { type: 'setEditedTodo'; payload: string }
   | { type: 'addTodo' }
-  | { type: 'removeTodo'; payload: string }
-  | { type: 'toggleTodo'; payload: string };
+  | { type: 'removeTodo'; payload: number }
+  | { type: 'toggleTodo'; payload: number };
 
 export const initialState: TodoState = {
   editedTodo: '',
@@ -58,7 +58,7 @@ export function reducer(state: TodoState, action: Action) {
         ...state,
         todoList: [
           ...state.todoList,
-          { id: uuidv4(), done: false, text: state.editedTodo },
+          { id: Math.random(), done: false, text: state.editedTodo },
         ],
         editedTodo: '',
       };
@@ -71,7 +71,7 @@ export function reducer(state: TodoState, action: Action) {
           ...state.todoList.slice(0, itemIndex),
           ...state.todoList.slice(itemIndex + 1),
         ],
-        // todoList: [...state.todoList, {id: uuidv4(), done: false, text: state.editedTodo}],
+        // todoList: [...state.todoList, {id: Math.random(), done: false, text: state.editedTodo}],
       };
     }
     case 'toggleTodo': {

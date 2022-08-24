@@ -5,15 +5,8 @@ import styles from './TodoListApp.module.scss';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
 import { useTodoStore } from '../../store';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 
 const TodoApp = () => {
-  const count = useRenderCounter();
-  // const [todoList, setTodoList] = useRecoilState(todoListAtom);
-  // const remainingTodoList = useRecoilValue(remainingTodoListSelector);
-  // const todoAlreadyExists = useRecoilValue(todoAlreadyExistsSelector);
-  // const [editedTodo, setEditedTodo] = useRecoilState(editedTodoAtom);
   const loadTodoList = useTodoStore((state) => state.load);
   const todoList = useTodoStore((state) => state.todoList);
   const editedTodo = useTodoStore((state) => state.editedTodo);
@@ -21,7 +14,6 @@ const TodoApp = () => {
   const setEditedTodo = useTodoStore((state) => state.setEditedTodo);
   const remainingTodoList = useTodoStore((state) => state.remainingTodoList);
   const todoAlreadyExists = useTodoStore((state) => state.todoAlreadyExists);
-  console.log('Rendering TodoApp');
 
   useEffect(() => {
     loadTodoList();
@@ -29,8 +21,6 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
-      <RenderCounter count={count} />
-
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

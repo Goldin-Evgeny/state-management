@@ -5,18 +5,13 @@ import _ from 'lodash';
 import { useGetTodoListQuery } from '../../services/todo';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 
 const TodoList = () => {
   const { data } = useGetTodoListQuery();
 
-  const count = useRenderCounter();
   if (_.isEmpty(data)) {
     return (
       <div className={styles['empty']}>
-        <RenderCounter count={count} />
-
         <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -42,8 +37,6 @@ const TodoList = () => {
 
   return (
     <ul>
-      <RenderCounter count={count} />
-
       {_.map(data, (todo: TodoModal) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}

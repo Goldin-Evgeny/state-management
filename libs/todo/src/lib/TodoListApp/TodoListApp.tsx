@@ -31,7 +31,6 @@ const TodoApp = (props: TodoAppProps) => {
     .size()
     .value();
 
-  console.log('Rendering TodoApp');
 
   return (
     <div className={styles['root']}>

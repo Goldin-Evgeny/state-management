@@ -10,7 +10,6 @@ export type TodoItemProps = {
 
 const TodoItem = (props: TodoItemProps) => {
   const { todo, handleRemoveTodo, handleToggleTodo } = props;
-  console.log('Rendering TodoItem');
 
   const prefixClass = 'todo-item';
 

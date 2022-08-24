@@ -31,12 +31,12 @@ class TodoListStore {
     return _.some(this.todoList, { text: this.newTodo });
   }
 
-  removeTodo(id: string) {
+  removeTodo(id: number) {
     this.todoList = _.filter(this.todoList, (todo) => todo.id !== id);
   }
 
-  toggleTodo(id: string) {
-    const index = _.findIndex(this.todoList, { id: id });
+  toggleTodo(id: number) {
+    const index = _.findIndex(this.todoList, { id });
     this.todoList[index].done = !this.todoList[index].done;
   }
 
@@ -45,7 +45,7 @@ class TodoListStore {
       return;
     }
     this.todoList.push({
-      id: uuidv4(),
+      id: Math.random(),
       text: this.newTodo,
       done: false,
     });

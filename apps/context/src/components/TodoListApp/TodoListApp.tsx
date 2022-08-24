@@ -1,5 +1,5 @@
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
+
 import _ from 'lodash';
 import React from 'react';
 import { useDispatchContext, useTodoContext } from '../../store';
@@ -14,12 +14,9 @@ const TodoApp = () => {
     .filter((todo) => !todo.done)
     .size()
     .value();
-  const count = useRenderCounter();
-  console.log('Rendering TodoApp');
 
   return (
     <div className={styles['root']}>
-      <RenderCounter count={count} />
 
       <div className={styles['todo']}>
         <div className={styles['header']}>

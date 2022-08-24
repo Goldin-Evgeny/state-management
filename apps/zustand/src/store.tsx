@@ -7,9 +7,9 @@ interface TodoState {
     todoList:TodoModal[]
     editedTodo:string
     setEditedTodo: (newTodo:string) => void
-    removeTodo: (id:string) => void
+    removeTodo: (id:number) => void
     addTodo: () => void
-    toggleTodo: (id:string) => void
+    toggleTodo: (id:number) => void
     load: () => void
     remainingTodoList: () => number
     todoAlreadyExists: () => boolean
@@ -18,13 +18,13 @@ export const useTodoStore = create<TodoState>((set, get) => ({
   todoList: [],
   editedTodo: '',
   setEditedTodo: (newTodo:string) => set((state) => ({...state, editedTodo:newTodo})),
-  removeTodo: (id:string) => set((state) => ({...state, todoList:_.filter(state.todoList, (todo) => todo.id !== id)})),
+  removeTodo: (id:number) => set((state) => ({...state, todoList:_.filter(state.todoList, (todo) => todo.id !== id)})),
   addTodo: () => set((state) => ({editedTodo: '', todoList: [...state.todoList, {
-    id: uuidv4(),
+    id: Math.random(),
     text: state.editedTodo,
     done: false,
   }]})),
-  toggleTodo: (id:string) => set((state) => {
+  toggleTodo: (id:number) => set((state) => {
     return {
         ...state,
         todoList: [

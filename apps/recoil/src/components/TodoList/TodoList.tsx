@@ -3,23 +3,19 @@ import _ from 'lodash';
 import TodoItem from '../TodoItem/TodoItem';
 import styles from './TodoList.module.scss';
 import { useRecoilValue } from 'recoil';
-import { useRenderCounter } from '@state-management/util';
+
 
 import { todoListAtom } from '../../store';
 import React from 'react';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
 
 const TodoList = () => {
   const todoList = useRecoilValue(todoListAtom);
 
-  const count = useRenderCounter();
-  console.log('Rendering TodoList');
-
   if (_.isEmpty(todoList)) {
     return (
       <div className={styles['empty']}>
-        <RenderCounter count={count} />
-        <p>
+          <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
               fill="none"
@@ -44,7 +40,6 @@ const TodoList = () => {
 
   return (
     <ul>
-      <RenderCounter count={count} />
       {_.map(todoList, (todo: TodoModal) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}

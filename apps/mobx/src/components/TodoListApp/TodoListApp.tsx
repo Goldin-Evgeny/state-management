@@ -5,16 +5,13 @@ import { observer } from 'mobx-react';
 
 import styles from './TodoListApp.module.scss';
 import React from 'react';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
+
 
 const TodoApp = () => {
-  const count = useRenderCounter();
-  console.log('Rendering App');
 
   return (
     <div className={styles['root']}>
-      <RenderCounter count={count} />
 
       <div className={styles['todo']}>
         <div className={styles['header']}>

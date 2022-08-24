@@ -1,7 +1,4 @@
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import _ from 'lodash';
-import React from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
@@ -27,13 +24,8 @@ const TodoApp = () => {
     dispatch(loadTodoList());
   }, []);
 
-  console.log('Rendering TodoApp');
-
-  const count = useRenderCounter();
   return (
     <div className={styles['root']}>
-      <RenderCounter count={count} />
-
       <div className={styles['todo']}>
         <div className={styles['header']}>
           <h1>Todo List</h1>

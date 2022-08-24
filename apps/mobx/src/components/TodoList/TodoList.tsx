@@ -6,18 +6,15 @@ import { observer } from 'mobx-react';
 
 import styles from './TodoList.module.scss';
 import React from 'react';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
+
 
 const TodoList = () => {
-  const count = useRenderCounter();
-  console.log('Rendering List');
 
   if (_.isEmpty(store.todoList)) {
     return (
       <div className={styles['empty']}>
-        <RenderCounter count={count} />
-
+  
         <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -43,7 +40,6 @@ const TodoList = () => {
 
   return (
     <ul>
-      <RenderCounter count={count} />
 
       {_.map(store.todoList, (todo: TodoModal) => (
         <TodoItem key={todo.id} todo={todo} />

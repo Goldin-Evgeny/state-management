@@ -3,25 +3,26 @@ import classNames from 'classnames';
 import React from 'react';
 import styles from './TodoItem.module.scss';
 import { useTodoStore } from '../../store';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+import _ from 'lodash';
+
 export type TodoItemProps = {
-  todo: TodoModal;
+  todoId: number;
 };
 
 const TodoItem = (props: TodoItemProps) => {
-  const count = useRenderCounter();
-  const { todo } = props;
+  const { todoId } = props;
 
   const toggleTodo = useTodoStore((state) => state.toggleTodo);
   const removeTodo = useTodoStore((state) => state.removeTodo);
+  const todo = useTodoStore((state) => _.find(state.todoList, (todo: TodoModal) => todo.id === todoId));
 
-  console.log('Rendering TodoItem');
+
+  if(_.isUndefined(todo)){
+    return null;
+  }
 
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-      <RenderCounter count={count} />
-
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input

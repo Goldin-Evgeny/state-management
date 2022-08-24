@@ -4,8 +4,8 @@ import styles from './TodoItem.module.scss';
 import { observer } from 'mobx-react';
 import store from '../../store';
 import React from 'react';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
+
 
 export type TodoItemProps = {
   todo: TodoModal;
@@ -13,11 +13,8 @@ export type TodoItemProps = {
 
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
-  const count = useRenderCounter();
-  console.log('Rendering Item');
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-      <RenderCounter count={count} />
 
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>

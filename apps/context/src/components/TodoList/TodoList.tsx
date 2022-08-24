@@ -1,6 +1,4 @@
 import { TodoModal } from '@state-management/todo';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import _ from 'lodash';
 import React from 'react';
 import { useTodoContext } from '../../store';
@@ -9,13 +7,10 @@ import styles from './TodoList.module.scss';
 
 const TodoList = () => {
   const { todoList } = useTodoContext();
-  console.log('Rendering TodoApp');
 
-  const count = useRenderCounter();
   if (_.isEmpty(todoList)) {
     return (
       <div className={styles['empty']}>
-        <RenderCounter count={count} />
         <p>
           <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
             <g
@@ -41,7 +36,6 @@ const TodoList = () => {
 
   return (
     <ul>
-      <RenderCounter count={count} />
       {_.map(todoList, (todo: TodoModal) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}

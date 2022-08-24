@@ -1,5 +1,5 @@
 export type TodoModal = {
-  id: string;
+  id: number;
   done: boolean;
   text: string;
 };

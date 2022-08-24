@@ -11,27 +11,24 @@ import {
 import { TodoModal } from '@state-management/todo';
 import { useAtom, useAtomValue } from 'jotai';
 import React from 'react';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
+
 
 const TodoApp = () => {
   const [todoList, setTodoList] = useAtom(todoListAtom);
   const remainingTodoList = useAtomValue(remainingTodoListSelector);
   const todoAlreadyExists = useAtomValue(todoAlreadyExistsSelector);
   const [editedTodo, setEditedTodo] = useAtom(editedTodoAtom);
-  console.log('Rendering TodoApp');
 
-  const count = useRenderCounter();
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
       const todoList: TodoModal[] = await response.json();
-      setTodoList(todoList);
+      setTodoList(_.map(todoList, todo => ({ ...todo, id: Math.random() })));
     });
   }, []);
 
   return (
     <div className={styles['root']}>
-      <RenderCounter count={count} />
 
       <div className={styles['todo']}>
         <div className={styles['header']}>
@@ -61,7 +58,7 @@ const TodoApp = () => {
                   ? prevState
                   : [
                       ...prevState,
-                      { id: _.uniqueId(), text: editedTodo, done: false },
+                      { id: Math.random(), text: editedTodo, done: false },
                     ]
               )
             }
@@ -73,7 +70,7 @@ const TodoApp = () => {
                   ? prevState
                   : [
                       ...prevState,
-                      { id: _.uniqueId(), text: editedTodo, done: false },
+                      { id: Math.random(), text: editedTodo, done: false },
                     ]
               )
             }

@@ -1,7 +1,5 @@
 import { TodoModal } from '@state-management/todo';
-import { useRenderCounter } from '@state-management/util';
 import classNames from 'classnames';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import React from 'react';
 import { useAppDispatch } from '../../redux/hooks';
 import { removeTodo, toggleTodo } from '../../redux/todoSlice';
@@ -14,12 +12,9 @@ export type TodoItemProps = {
 const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
   const dispatch = useAppDispatch();
-  console.log('Rendering TodoItem');
-
-  const count = useRenderCounter();
+  
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-      <RenderCounter count={count} />
 
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>

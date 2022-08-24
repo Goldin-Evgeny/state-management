@@ -27,18 +27,18 @@ export const todoSlice = createSlice({
     },
     addTodo: (state) => {
       state.todoList.push({
-        id: uuidv4(),
+        id: Math.random(),
         done: false,
         text: state.editedTodo,
       });
       state.editedTodo = '';
     },
-    removeTodo: (state, action: PayloadAction<string>) => {
+    removeTodo: (state, action: PayloadAction<number>) => {
       state.todoList = state.todoList.filter(
         (todo) => todo.id !== action.payload
       );
     },
-    toggleTodo: (state, action: PayloadAction<string>) => {
+    toggleTodo: (state, action: PayloadAction<number>) => {
       const index = _.findIndex(state.todoList, { id: action.payload });
       state.todoList[index].done = !state.todoList[index].done;
     },

@@ -11,19 +11,17 @@ import {
 } from '../../store';
 import { TodoModal } from '@state-management/todo';
 import React from 'react';
-import { useRenderCounter } from '@state-management/util';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
+
 
 
 
 const TodoApp = () => {
-  const count = useRenderCounter();
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const remainingTodoList = useRecoilValue(remainingTodoListSelector);
   const todoAlreadyExists = useRecoilValue(todoAlreadyExistsSelector);
   const [editedTodo, setEditedTodo] = useRecoilState(editedTodoAtom);
 
-  console.log('Rendering TodoApp');
 
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
@@ -34,7 +32,6 @@ const TodoApp = () => {
 
   return (
     <div className={styles['root']}>
-      <RenderCounter count={count} />
 
       <div className={styles['todo']}>
         <div className={styles['header']}>
@@ -64,7 +61,7 @@ const TodoApp = () => {
                   ? prevState
                   : [
                       ...prevState,
-                      { id: _.uniqueId(), text: editedTodo, done: false },
+                      { id: Math.random(), text: editedTodo, done: false },
                     ]
               )
             }
@@ -76,7 +73,7 @@ const TodoApp = () => {
                   ? prevState
                   : [
                       ...prevState,
-                      { id: _.uniqueId(), text: editedTodo, done: false },
+                      { id: Math.random(), text: editedTodo, done: false },
                     ]
               )
             }

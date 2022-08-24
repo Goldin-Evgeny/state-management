@@ -1,7 +1,5 @@
 import { TodoModal } from '@state-management/todo';
-import { useRenderCounter } from '@state-management/util';
 import classNames from 'classnames';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
 import React from 'react';
 import { useDispatchContext } from '../../store';
 import styles from './TodoItem.module.scss';
@@ -14,13 +12,9 @@ const TodoItem = (props: TodoItemProps) => {
   const { todo } = props;
   const dispatch = useDispatchContext();
 
-  const count = useRenderCounter();
-  console.log('Rendering TodoItem');
 
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-      <RenderCounter count={count} />
-
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input

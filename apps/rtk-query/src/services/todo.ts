@@ -35,7 +35,7 @@ export const todoListApi = createApi({
       // that newly created post could show up in any lists.
       invalidatesTags: ['TODO_LIST'],
     }),
-    deleteTodo: build.mutation<TodoModal, string>({
+    deleteTodo: build.mutation<TodoModal, number>({
       query(id) {
         return {
           url: `todo/${id}`,

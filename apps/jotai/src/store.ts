@@ -4,6 +4,11 @@ import { atom, PrimitiveAtom, useAtom } from 'jotai';
 
 export const todoListAtom = atom<TodoModal[]>([]);
 
+export const todoIdListAtom = atom<number[]>((get) => {
+  const todoList: TodoModal[] = get(todoListAtom);
+  return _.map(todoList, (todo) => todo.id)
+});
+
 export const editedTodoAtom = atom('');
 
 export const remainingTodoListSelector = atom<number>((get) => {

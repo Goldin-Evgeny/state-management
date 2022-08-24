@@ -1,7 +1,7 @@
 import { TodoModal } from '@state-management/todo';
-import { useRenderCounter } from '@state-management/util';
+
 import classNames from 'classnames';
-import RenderCounter from 'libs/util/src/lib/components/RenderCounter/RenderCounter';
+
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { todoListAtom } from '../../store';
@@ -14,12 +14,10 @@ export type TodoItemProps = {
 
 
 const TodoItem = (props: TodoItemProps) => {
-  const count = useRenderCounter();
   const { todo } = props;
 
   const setTodoList = useSetRecoilState(todoListAtom);
 
-  console.log('Rendering TodoItem');
 
   const handleToggleTodo = () => {
     setTodoList((prevState) =>
@@ -35,7 +33,6 @@ const TodoItem = (props: TodoItemProps) => {
 
   return (
     <li className={classNames(styles['root'], todo.done ? styles['done'] : '')}>
-      <RenderCounter count={count} />
       <div className={styles['infos']}>
         <label className={styles['checkbox']}>
           <input
