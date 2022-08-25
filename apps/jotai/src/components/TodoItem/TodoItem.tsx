@@ -13,12 +13,10 @@ export type TodoItemProps = {
 
 const TodoItem = (props: TodoItemProps) => {
   const { todoId } = props;
-  // const todo = useAtomValue(todoListAtom)[todoId];
   const [todo] = useAtom(
     useMemo(
-      // This is also fine
       () => atom((get) => get(todoListAtom).find((todo) => todo.id === todoId)),
-      []
+      [todoId]
     )
   );
   const setTodoList = useSetAtom(todoListAtom);
