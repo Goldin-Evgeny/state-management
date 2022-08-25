@@ -1,23 +1,26 @@
 import { TodoModal } from '@state-management/todo';
 
 import classNames from 'classnames';
+import _ from 'lodash';
 
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
-import { todoListAtom } from '../../store';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { todoByIdAtom, todoListAtom } from '../../store';
 import styles from './TodoItem.module.scss';
 
 export type TodoItemProps = {
-  todo: TodoModal;
+  todoId: number;
 };
 
-
-
 const TodoItem = (props: TodoItemProps) => {
-  const { todo } = props;
+  const { todoId } = props;
 
   const setTodoList = useSetRecoilState(todoListAtom);
+  const todo = useRecoilValue(todoByIdAtom(todoId));
 
+  if (_.isUndefined(todo)) {
+    return null;
+  }
 
   const handleToggleTodo = () => {
     setTodoList((prevState) =>

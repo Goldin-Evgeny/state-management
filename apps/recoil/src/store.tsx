@@ -1,6 +1,6 @@
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
-import { atom, selector } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 
 export const todoListAtom = atom<TodoModal[]>({
   key: 'todoList',
@@ -10,6 +10,11 @@ export const todoListAtom = atom<TodoModal[]>({
 export const editedTodoAtom = atom({
   key: 'editedTodo',
   default: '',
+});
+
+export const todoIDListAtom = selector<number[]>({
+  key: 'todoIDList',
+  get: ({ get }) => _.map(get(todoListAtom), (todo) => todo.id),
 });
 
 export const remainingTodoListSelector = selector({
@@ -26,3 +31,11 @@ export const todoAlreadyExistsSelector = selector({
   get: ({ get }) => _.find(get(todoListAtom), { text: get(editedTodoAtom) }),
 });
 
+export const todoByIdAtom = selectorFamily({
+  key: 'todoById',
+  get:
+    (id: number) =>
+    ({ get }) => {
+      return _.find(get(todoListAtom), { id });
+    },
+});

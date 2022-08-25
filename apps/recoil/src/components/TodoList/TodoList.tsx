@@ -5,12 +5,16 @@ import styles from './TodoList.module.scss';
 import { useRecoilValue } from 'recoil';
 
 
-import { todoListAtom } from '../../store';
+import { todoIDListAtom } from '../../store';
 import React from 'react';
 
 
 const TodoList = () => {
-  const todoList = useRecoilValue(todoListAtom);
+  /**
+   * It seems recoil does not support yet suppressing downstream updates and subscriptions if computed value has not changed
+   * https://github.com/facebookexperimental/Recoil/issues/314
+   */
+  const todoList = useRecoilValue(todoIDListAtom);
 
   if (_.isEmpty(todoList)) {
     return (
@@ -40,8 +44,8 @@ const TodoList = () => {
 
   return (
     <ul>
-      {_.map(todoList, (todo: TodoModal) => (
-        <TodoItem key={todo.id} todo={todo} />
+      {_.map(todoList, (todo: number) => (
+        <TodoItem key={todo} todoId={todo} />
       ))}
     </ul>
   );
