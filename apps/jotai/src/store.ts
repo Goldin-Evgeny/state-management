@@ -1,7 +1,6 @@
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
-import { atom, PrimitiveAtom, useAtom } from 'jotai';
-import { atomWithReducer } from 'jotai/utils';
+import { atom } from 'jotai';
 
 export const todoListAtom = atom<TodoModal[]>([]);
 

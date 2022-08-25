@@ -1,7 +1,6 @@
 import { TodoModal } from '@state-management/todo';
 import _ from 'lodash';
 import React, { Dispatch, useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 export type TodoState = {
   todoList: TodoModal[];
@@ -21,12 +20,12 @@ export const initialState: TodoState = {
 };
 
 /**
- * React context will create an object which coupled with useContext hook will act a sort of 
+ * React context will create an object which coupled with useContext hook will act a sort of
  * dependency injection, allowing us to wrap the app with Context.Provider and using the useContext hook
  * extract the data from components deep in the tree, avoiding drilling the props all the way down.
  */
 export const TodoContext = React.createContext<TodoState>(initialState);
-export const DispatchContext = React.createContext<Dispatch<Action>>(() => {});
+export const DispatchContext = React.createContext<Dispatch<Action>>((action:Action) => initialState);
 
 export const useTodoContext = () => {
   return useContext(TodoContext);
@@ -36,7 +35,7 @@ export const useDispatchContext = () => {
 };
 
 /**
- * Reducer function that will be used by the useReducer hook, it will accept the current 
+ * Reducer function that will be used by the useReducer hook, it will accept the current
  * state and with it and the action will produce a new state.
  */
 export function reducer(state: TodoState, action: Action) {
@@ -58,7 +57,11 @@ export function reducer(state: TodoState, action: Action) {
         ...state,
         todoList: [
           ...state.todoList,
-          { id: _.random(Number.MAX_SAFE_INTEGER), done: false, text: state.editedTodo },
+          {
+            id: _.random(Number.MAX_SAFE_INTEGER),
+            done: false,
+            text: state.editedTodo,
+          },
         ],
         editedTodo: '',
       };

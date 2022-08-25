@@ -4,8 +4,8 @@ import styles from './TodoItem.module.scss';
 
 export type TodoItemProps = {
   todo: TodoModal;
-  handleToggleTodo: Function;
-  handleRemoveTodo: Function;
+  handleToggleTodo: (todo:TodoModal) => void;
+  handleRemoveTodo: (todo:TodoModal) => void;
 };
 
 const TodoItem = (props: TodoItemProps) => {

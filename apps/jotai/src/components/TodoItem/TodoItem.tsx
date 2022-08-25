@@ -1,9 +1,7 @@
-import { TodoModal } from '@state-management/todo';
 import classNames from 'classnames';
-import { useSetRecoilState } from 'recoil';
 import { todoListAtom } from '../../store';
 import styles from './TodoItem.module.scss';
-import { useSetAtom, Provider, atom, useAtom, useAtomValue } from 'jotai';
+import { useSetAtom, atom, useAtom } from 'jotai';
 import React, { useMemo } from 'react';
 import _ from 'lodash';
 

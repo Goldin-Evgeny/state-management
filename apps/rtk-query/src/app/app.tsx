@@ -4,9 +4,7 @@ import styles from './app.module.scss';
 
 export function App() {
   return (
-    <>
-      <TodoApp/>
-    </>
+    <TodoApp/>
   );
 }
 

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import RemainingTodoMessage from '../RemainingTodoMessage/RemainingTodoMessage';
 import TodoForm from '../TodoForm/TodoForm';
