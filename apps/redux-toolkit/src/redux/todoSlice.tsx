@@ -25,19 +25,6 @@ export const todoSlice = createSlice({
     setEditedTodo: (state, action: PayloadAction<string>) => {
       state.editedTodo = action.payload;
     },
-    addTodo: (state) => {
-      state.todoList.push({
-        id: _.random(Number.MAX_SAFE_INTEGER),
-        done: false,
-        text: state.editedTodo,
-      });
-      state.editedTodo = '';
-    },
-    removeTodo: (state, action: PayloadAction<number>) => {
-      state.todoList = state.todoList.filter(
-        (todo) => todo.id !== action.payload
-      );
-    },
     toggleTodo: (state, action: PayloadAction<number>) => {
       const index = _.findIndex(state.todoList, { id: action.payload });
       state.todoList[index].done = !state.todoList[index].done;
@@ -45,7 +32,7 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { setTodoList, setEditedTodo, addTodo, removeTodo, toggleTodo } =  todoSlice.actions;
+export const { setTodoList, setEditedTodo, toggleTodo } =  todoSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

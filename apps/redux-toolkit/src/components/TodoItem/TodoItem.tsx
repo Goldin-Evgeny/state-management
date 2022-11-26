@@ -1,9 +1,8 @@
-import { TodoModal } from '@state-management/todo';
 import classNames from 'classnames';
 import _ from 'lodash';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { removeTodo, selectTodoIDList, toggleTodo } from '../../redux/todoSlice';
+import { toggleTodo } from '../../redux/todoSlice';
 import styles from './TodoItem.module.scss';
 
 export type TodoItemProps = {
@@ -35,7 +34,6 @@ const TodoItem = (props: TodoItemProps) => {
       </div>
       <div className={styles['remove']}>
         <button
-          onClick={() => dispatch(removeTodo(todo.id))}
           title="Remover item"
         >
           <svg

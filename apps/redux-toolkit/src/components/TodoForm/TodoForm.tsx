@@ -5,7 +5,6 @@ import {
   selectEditedTodo,
   selectTodoAlreadyExists,
   setEditedTodo,
-  addTodo,
 } from '../../redux/todoSlice';
 
 import styles from './TodoForm.module.scss';
@@ -23,9 +22,8 @@ function TodoForm() {
         value={editedTodo}
         onChange={(evt) => dispatch(setEditedTodo(evt.target.value))}
         placeholder="Add todo..."
-        onKeyUp={(evt) => evt.key === 'Enter' && dispatch(addTodo())}
       />
-      <button onClick={() => dispatch(addTodo())}>+</button>
+      <button>+</button>
     </div>
   );
 }
