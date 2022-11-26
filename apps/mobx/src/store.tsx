@@ -31,25 +31,9 @@ class TodoListStore {
     return _.some(this.todoList, { text: this.newTodo });
   }
 
-  removeTodo(id: number) {
-    this.todoList = _.filter(this.todoList, (todo) => todo.id !== id);
-  }
-
   toggleTodo(id: number) {
     const index = _.findIndex(this.todoList, { id });
     this.todoList[index].done = !this.todoList[index].done;
-  }
-
-  addTodo() {
-    if (this.todoAlreadyExists) {
-      return;
-    }
-    this.todoList.push({
-      id: _.random(Number.MAX_SAFE_INTEGER),
-      text: this.newTodo,
-      done: false,
-    });
-    this.newTodo = '';
   }
 
   async load() {

@@ -14,9 +14,8 @@ function TodoForm() {
         value={store.editedTodo}
         onChange={(evt) => (store.editedTodo = evt.target.value)}
         placeholder="Add todo..."
-        onKeyUp={(evt) => evt.key === 'Enter' && store.addTodo()}
       />
-      <button onClick={() => store.addTodo()}>+</button>
+      <button>+</button>
     </div>
   );
 }

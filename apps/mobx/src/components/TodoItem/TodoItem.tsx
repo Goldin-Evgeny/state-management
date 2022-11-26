@@ -28,7 +28,7 @@ const TodoItem = (props: TodoItemProps) => {
         <div className={styles['text']}>{todo.text}</div>
       </div>
       <div className={styles['remove']}>
-        <button onClick={() => store.removeTodo(todo.id)} title="Remover item">
+        <button title="Remover item">
           <svg
             height="21"
             viewBox="0 0 21 21"
