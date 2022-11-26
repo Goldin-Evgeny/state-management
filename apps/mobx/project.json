@@ -48,7 +48,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "mobx:build",
-        "port": 4200,
+        "port": 4202,
         "hmr": true
       },
       "configurations": {
