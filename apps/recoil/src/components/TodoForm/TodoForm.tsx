@@ -26,30 +26,9 @@ function TodoForm() {
           if (!_.isEqual(event.key, 'Enter')) {
             return;
           }
-          setTodoList((prevState) =>
-            todoAlreadyExists
-              ? prevState
-              : [
-                  ...prevState,
-                  { id: _.random(Number.MAX_SAFE_INTEGER), text: editedTodo, done: false },
-                ]
-          );
-          setEditedTodo('');
         }}
       />
-      <button
-        onClick={() => {
-          setTodoList((prevState) =>
-            todoAlreadyExists
-              ? prevState
-              : [
-                  ...prevState,
-                  { id: _.random(Number.MAX_SAFE_INTEGER), text: editedTodo, done: false },
-                ]
-          );
-          setEditedTodo('');
-        }}
-      >
+      <button>
         +
       </button>
     </div>
