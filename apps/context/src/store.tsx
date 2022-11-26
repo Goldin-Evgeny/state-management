@@ -52,30 +52,6 @@ export function reducer(state: TodoState, action: Action) {
         editedTodo: action.payload,
       };
     }
-    case 'addTodo': {
-      return {
-        ...state,
-        todoList: [
-          ...state.todoList,
-          {
-            id: _.random(Number.MAX_SAFE_INTEGER),
-            done: false,
-            text: state.editedTodo,
-          },
-        ],
-        editedTodo: '',
-      };
-    }
-    case 'removeTodo': {
-      const itemIndex = _.findIndex(state.todoList, { id: action.payload });
-      return {
-        ...state,
-        todoList: [
-          ...state.todoList.slice(0, itemIndex),
-          ...state.todoList.slice(itemIndex + 1),
-        ],
-      };
-    }
     case 'toggleTodo': {
       return {
         ...state,
