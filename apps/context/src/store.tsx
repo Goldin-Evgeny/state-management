@@ -13,6 +13,12 @@ type Action =
   | { type: 'addTodo' }
   | { type: 'removeTodo'; payload: number }
   | { type: 'toggleTodo'; payload: number };
+  
+  export const setTodoList = (payload: TodoModal[]):Action => ({ type: 'setTodoList', payload });
+  export const setEditedTodo = (payload: string):Action => ({ type: 'setEditedTodo', payload });
+  export const addTodo = ():Action => ({ type: 'addTodo' });
+  export const removeTodo = (payload: number):Action => ({ type: 'removeTodo', payload });
+  export const toggleTodo = (payload: number):Action => ({ type: 'toggleTodo', payload });
 
 export const initialState: TodoState = {
   editedTodo: '',

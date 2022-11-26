@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { useDispatchContext, useTodoContext } from '../../store';
+import { addTodo, setEditedTodo, useDispatchContext, useTodoContext } from '../../store';
 
 import styles from './TodoForm.module.scss';
 
@@ -17,12 +17,12 @@ function TodoForm() {
         type="text"
         value={editedTodo}
         onChange={(evt) =>
-          dispatch({ type: 'setEditedTodo', payload: evt.target.value })
+          dispatch(setEditedTodo(evt.target.value))
         }
         placeholder="Add todo..."
-        onKeyUp={(evt) => evt.key === 'Enter' && dispatch({ type: 'addTodo' })}
+        onKeyUp={(evt) => evt.key === 'Enter' && dispatch(addTodo())}
       />
-      <button onClick={() => dispatch({ type: 'addTodo' })}>+</button>
+      <button onClick={() => dispatch(addTodo())}>+</button>
     </div>
   );
 }

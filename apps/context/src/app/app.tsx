@@ -2,7 +2,7 @@ import { TodoModal } from '@state-management/todo';
 import React, { useEffect } from 'react';
 import { useReducer } from 'react';
 import TodoApp from '../components/TodoListApp/TodoListApp';
-import { DispatchContext, initialState, reducer, TodoContext } from '../store';
+import { DispatchContext, initialState, reducer, setTodoList, TodoContext } from '../store';
 
 export function App() {
   /**
@@ -15,7 +15,7 @@ export function App() {
   useEffect(() => {
     fetch('http://localhost:3001/todo').then(async (response) => {
       const todoList: TodoModal[] = await response.json();
-      dispatch({ type: 'setTodoList', payload: todoList });
+      dispatch(setTodoList(todoList));
     });
   }, []);
 

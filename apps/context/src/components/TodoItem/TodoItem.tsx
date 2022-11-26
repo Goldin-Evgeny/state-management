@@ -1,7 +1,7 @@
 import { TodoModal } from '@state-management/todo';
 import classNames from 'classnames';
 import React from 'react';
-import { useDispatchContext } from '../../store';
+import { removeTodo, toggleTodo, useDispatchContext } from '../../store';
 import styles from './TodoItem.module.scss';
 
 export type TodoItemProps = {
@@ -19,7 +19,7 @@ const TodoItem = (props: TodoItemProps) => {
         <label className={styles['checkbox']}>
           <input
             type="checkbox"
-            onChange={() => dispatch({ type: 'toggleTodo', payload: todo.id })}
+            onChange={() => dispatch(toggleTodo(todo.id))}
             checked={todo.done}
           />
           <div className={styles['el']} />
@@ -28,7 +28,7 @@ const TodoItem = (props: TodoItemProps) => {
       </div>
       <div className={styles['remove']}>
         <button
-          onClick={() => dispatch({ type: 'removeTodo', payload: todo.id })}
+          onClick={() => dispatch(removeTodo(todo.id))}
           title="Remover item"
         >
           <svg
